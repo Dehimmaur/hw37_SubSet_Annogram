@@ -102,4 +102,21 @@ public class MyTree {
             subSetRecursive(node.right, from, to, result);
         }
     }
+
+    public void trimSet(int start, int end) {
+        root = trimSetRecursive(root, start, end);
+    }
+
+    private Node trimSetRecursive(Node node, int start, int end) {
+        if (node == null) return null;
+        if (node.value < start) {
+            return trimSetRecursive(node.right, start, end);
+        }
+        if (node.value > end) {
+            return trimSetRecursive(node.left, start, end);
+        }
+        node.left = trimSetRecursive(node.left, start, end);
+        node.right = trimSetRecursive(node.right, start, end);
+        return node;
+    }
 }
